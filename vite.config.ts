@@ -15,7 +15,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
+    },
+  },
+  server: {
+    // En dev el back (Nest) corre en :3000; en prod /api lo resuelve el proxy del servidor
+    proxy: {
+      "/api": "http://localhost:3000",
     },
   },
 });

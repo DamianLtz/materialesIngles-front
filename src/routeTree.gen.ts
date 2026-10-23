@@ -9,50 +9,471 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as FrontRouteRouteImport } from './routes/_front/route'
+import { Route as BackRouteRouteImport } from './routes/back/route'
+import { Route as FrontIndexRouteImport } from './routes/_front/index'
+import { Route as BackIndexRouteImport } from './routes/back/index'
+import { Route as BackDashboardRouteImport } from './routes/back/dashboard'
+import { Route as FrontCueanexoIndexRouteImport } from './routes/_front/$cueanexo/index'
+import { Route as BackAsignacionMasivaIndexRouteImport } from './routes/back/asignacion-masiva/index'
+import { Route as BackCatalogosIndexRouteImport } from './routes/back/catalogos/index'
+import { Route as BackEscuelasIndexRouteImport } from './routes/back/escuelas/index'
+import { Route as BackEtapasIndexRouteImport } from './routes/back/etapas/index'
+import { Route as BackEtapasCrearRouteImport } from './routes/back/etapas/crear'
+import { Route as BackGradosIndexRouteImport } from './routes/back/grados/index'
+import { Route as BackPedidosIndexRouteImport } from './routes/back/pedidos/index'
+import { Route as BackReclamosIndexRouteImport } from './routes/back/reclamos/index'
+import { Route as BackTiposReclamoIndexRouteImport } from './routes/back/tipos-reclamo/index'
+import { Route as BackUsuariosIndexRouteImport } from './routes/back/usuarios/index'
+import { Route as BackCatalogosCatalogoIdLibrosRouteImport } from './routes/back/catalogos/$catalogoId/libros'
+import { Route as BackEscuelasEscuelaIdLibrosRouteImport } from './routes/back/escuelas/$escuelaId/libros'
+import { Route as BackEtapasEtapaIdEditarRouteImport } from './routes/back/etapas/$etapaId/editar'
+import { Route as FrontCueanexoOrder_requestCreateOfertaIdRouteImport } from './routes/_front/$cueanexo/order_request/create/$ofertaId'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const FrontRouteRoute = FrontRouteRouteImport.update({
+  id: '/_front',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BackRouteRoute = BackRouteRouteImport.update({
+  id: '/back',
+  path: '/back',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrontIndexRoute = FrontIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FrontRouteRoute,
+} as any)
+const BackIndexRoute = BackIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackDashboardRoute = BackDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const FrontCueanexoIndexRoute = FrontCueanexoIndexRouteImport.update({
+  id: '/$cueanexo/',
+  path: '/$cueanexo/',
+  getParentRoute: () => FrontRouteRoute,
+} as any)
+const BackAsignacionMasivaIndexRoute =
+  BackAsignacionMasivaIndexRouteImport.update({
+    id: '/asignacion-masiva/',
+    path: '/asignacion-masiva/',
+    getParentRoute: () => BackRouteRoute,
+  } as any)
+const BackCatalogosIndexRoute = BackCatalogosIndexRouteImport.update({
+  id: '/catalogos/',
+  path: '/catalogos/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackEscuelasIndexRoute = BackEscuelasIndexRouteImport.update({
+  id: '/escuelas/',
+  path: '/escuelas/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackEtapasIndexRoute = BackEtapasIndexRouteImport.update({
+  id: '/etapas/',
+  path: '/etapas/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackEtapasCrearRoute = BackEtapasCrearRouteImport.update({
+  id: '/etapas/crear',
+  path: '/etapas/crear',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackGradosIndexRoute = BackGradosIndexRouteImport.update({
+  id: '/grados/',
+  path: '/grados/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackPedidosIndexRoute = BackPedidosIndexRouteImport.update({
+  id: '/pedidos/',
+  path: '/pedidos/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackReclamosIndexRoute = BackReclamosIndexRouteImport.update({
+  id: '/reclamos/',
+  path: '/reclamos/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackTiposReclamoIndexRoute = BackTiposReclamoIndexRouteImport.update({
+  id: '/tipos-reclamo/',
+  path: '/tipos-reclamo/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackUsuariosIndexRoute = BackUsuariosIndexRouteImport.update({
+  id: '/usuarios/',
+  path: '/usuarios/',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const BackCatalogosCatalogoIdLibrosRoute =
+  BackCatalogosCatalogoIdLibrosRouteImport.update({
+    id: '/catalogos/$catalogoId/libros',
+    path: '/catalogos/$catalogoId/libros',
+    getParentRoute: () => BackRouteRoute,
+  } as any)
+const BackEscuelasEscuelaIdLibrosRoute =
+  BackEscuelasEscuelaIdLibrosRouteImport.update({
+    id: '/escuelas/$escuelaId/libros',
+    path: '/escuelas/$escuelaId/libros',
+    getParentRoute: () => BackRouteRoute,
+  } as any)
+const BackEtapasEtapaIdEditarRoute = BackEtapasEtapaIdEditarRouteImport.update({
+  id: '/etapas/$etapaId/editar',
+  path: '/etapas/$etapaId/editar',
+  getParentRoute: () => BackRouteRoute,
+} as any)
+const FrontCueanexoOrder_requestCreateOfertaIdRoute =
+  FrontCueanexoOrder_requestCreateOfertaIdRouteImport.update({
+    id: '/$cueanexo/order_request/create/$ofertaId',
+    path: '/$cueanexo/order_request/create/$ofertaId',
+    getParentRoute: () => FrontRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof FrontIndexRoute
+  '/back': typeof BackRouteRouteWithChildren
+  '/back/dashboard': typeof BackDashboardRoute
+  '/back/': typeof BackIndexRoute
+  '/back/etapas/crear': typeof BackEtapasCrearRoute
+  '/$cueanexo/': typeof FrontCueanexoIndexRoute
+  '/back/asignacion-masiva/': typeof BackAsignacionMasivaIndexRoute
+  '/back/catalogos/': typeof BackCatalogosIndexRoute
+  '/back/escuelas/': typeof BackEscuelasIndexRoute
+  '/back/etapas/': typeof BackEtapasIndexRoute
+  '/back/grados/': typeof BackGradosIndexRoute
+  '/back/pedidos/': typeof BackPedidosIndexRoute
+  '/back/reclamos/': typeof BackReclamosIndexRoute
+  '/back/tipos-reclamo/': typeof BackTiposReclamoIndexRoute
+  '/back/usuarios/': typeof BackUsuariosIndexRoute
+  '/back/catalogos/$catalogoId/libros': typeof BackCatalogosCatalogoIdLibrosRoute
+  '/back/escuelas/$escuelaId/libros': typeof BackEscuelasEscuelaIdLibrosRoute
+  '/back/etapas/$etapaId/editar': typeof BackEtapasEtapaIdEditarRoute
+  '/$cueanexo/order_request/create/$ofertaId': typeof FrontCueanexoOrder_requestCreateOfertaIdRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/back/dashboard': typeof BackDashboardRoute
+  '/': typeof FrontIndexRoute
+  '/back': typeof BackIndexRoute
+  '/back/etapas/crear': typeof BackEtapasCrearRoute
+  '/$cueanexo': typeof FrontCueanexoIndexRoute
+  '/back/asignacion-masiva': typeof BackAsignacionMasivaIndexRoute
+  '/back/catalogos': typeof BackCatalogosIndexRoute
+  '/back/escuelas': typeof BackEscuelasIndexRoute
+  '/back/etapas': typeof BackEtapasIndexRoute
+  '/back/grados': typeof BackGradosIndexRoute
+  '/back/pedidos': typeof BackPedidosIndexRoute
+  '/back/reclamos': typeof BackReclamosIndexRoute
+  '/back/tipos-reclamo': typeof BackTiposReclamoIndexRoute
+  '/back/usuarios': typeof BackUsuariosIndexRoute
+  '/back/catalogos/$catalogoId/libros': typeof BackCatalogosCatalogoIdLibrosRoute
+  '/back/escuelas/$escuelaId/libros': typeof BackEscuelasEscuelaIdLibrosRoute
+  '/back/etapas/$etapaId/editar': typeof BackEtapasEtapaIdEditarRoute
+  '/$cueanexo/order_request/create/$ofertaId': typeof FrontCueanexoOrder_requestCreateOfertaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_front': typeof FrontRouteRouteWithChildren
+  '/back': typeof BackRouteRouteWithChildren
+  '/back/dashboard': typeof BackDashboardRoute
+  '/_front/': typeof FrontIndexRoute
+  '/back/': typeof BackIndexRoute
+  '/back/etapas/crear': typeof BackEtapasCrearRoute
+  '/_front/$cueanexo/': typeof FrontCueanexoIndexRoute
+  '/back/asignacion-masiva/': typeof BackAsignacionMasivaIndexRoute
+  '/back/catalogos/': typeof BackCatalogosIndexRoute
+  '/back/escuelas/': typeof BackEscuelasIndexRoute
+  '/back/etapas/': typeof BackEtapasIndexRoute
+  '/back/grados/': typeof BackGradosIndexRoute
+  '/back/pedidos/': typeof BackPedidosIndexRoute
+  '/back/reclamos/': typeof BackReclamosIndexRoute
+  '/back/tipos-reclamo/': typeof BackTiposReclamoIndexRoute
+  '/back/usuarios/': typeof BackUsuariosIndexRoute
+  '/back/catalogos/$catalogoId/libros': typeof BackCatalogosCatalogoIdLibrosRoute
+  '/back/escuelas/$escuelaId/libros': typeof BackEscuelasEscuelaIdLibrosRoute
+  '/back/etapas/$etapaId/editar': typeof BackEtapasEtapaIdEditarRoute
+  '/_front/$cueanexo/order_request/create/$ofertaId': typeof FrontCueanexoOrder_requestCreateOfertaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/back'
+    | '/back/dashboard'
+    | '/back/'
+    | '/back/etapas/crear'
+    | '/$cueanexo/'
+    | '/back/asignacion-masiva/'
+    | '/back/catalogos/'
+    | '/back/escuelas/'
+    | '/back/etapas/'
+    | '/back/grados/'
+    | '/back/pedidos/'
+    | '/back/reclamos/'
+    | '/back/tipos-reclamo/'
+    | '/back/usuarios/'
+    | '/back/catalogos/$catalogoId/libros'
+    | '/back/escuelas/$escuelaId/libros'
+    | '/back/etapas/$etapaId/editar'
+    | '/$cueanexo/order_request/create/$ofertaId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/back/dashboard'
+    | '/'
+    | '/back'
+    | '/back/etapas/crear'
+    | '/$cueanexo'
+    | '/back/asignacion-masiva'
+    | '/back/catalogos'
+    | '/back/escuelas'
+    | '/back/etapas'
+    | '/back/grados'
+    | '/back/pedidos'
+    | '/back/reclamos'
+    | '/back/tipos-reclamo'
+    | '/back/usuarios'
+    | '/back/catalogos/$catalogoId/libros'
+    | '/back/escuelas/$escuelaId/libros'
+    | '/back/etapas/$etapaId/editar'
+    | '/$cueanexo/order_request/create/$ofertaId'
+  id:
+    | '__root__'
+    | '/_front'
+    | '/back'
+    | '/back/dashboard'
+    | '/_front/'
+    | '/back/'
+    | '/back/etapas/crear'
+    | '/_front/$cueanexo/'
+    | '/back/asignacion-masiva/'
+    | '/back/catalogos/'
+    | '/back/escuelas/'
+    | '/back/etapas/'
+    | '/back/grados/'
+    | '/back/pedidos/'
+    | '/back/reclamos/'
+    | '/back/tipos-reclamo/'
+    | '/back/usuarios/'
+    | '/back/catalogos/$catalogoId/libros'
+    | '/back/escuelas/$escuelaId/libros'
+    | '/back/etapas/$etapaId/editar'
+    | '/_front/$cueanexo/order_request/create/$ofertaId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  FrontRouteRoute: typeof FrontRouteRouteWithChildren
+  BackRouteRoute: typeof BackRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_front': {
+      id: '/_front'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof FrontRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/back': {
+      id: '/back'
+      path: '/back'
+      fullPath: '/back'
+      preLoaderRoute: typeof BackRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_front/': {
+      id: '/_front/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof FrontIndexRouteImport
+      parentRoute: typeof FrontRouteRoute
+    }
+    '/back/': {
+      id: '/back/'
+      path: '/'
+      fullPath: '/back/'
+      preLoaderRoute: typeof BackIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/dashboard': {
+      id: '/back/dashboard'
+      path: '/dashboard'
+      fullPath: '/back/dashboard'
+      preLoaderRoute: typeof BackDashboardRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/_front/$cueanexo/': {
+      id: '/_front/$cueanexo/'
+      path: '/$cueanexo'
+      fullPath: '/$cueanexo/'
+      preLoaderRoute: typeof FrontCueanexoIndexRouteImport
+      parentRoute: typeof FrontRouteRoute
+    }
+    '/back/asignacion-masiva/': {
+      id: '/back/asignacion-masiva/'
+      path: '/asignacion-masiva'
+      fullPath: '/back/asignacion-masiva/'
+      preLoaderRoute: typeof BackAsignacionMasivaIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/catalogos/': {
+      id: '/back/catalogos/'
+      path: '/catalogos'
+      fullPath: '/back/catalogos/'
+      preLoaderRoute: typeof BackCatalogosIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/escuelas/': {
+      id: '/back/escuelas/'
+      path: '/escuelas'
+      fullPath: '/back/escuelas/'
+      preLoaderRoute: typeof BackEscuelasIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/etapas/': {
+      id: '/back/etapas/'
+      path: '/etapas'
+      fullPath: '/back/etapas/'
+      preLoaderRoute: typeof BackEtapasIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/etapas/crear': {
+      id: '/back/etapas/crear'
+      path: '/etapas/crear'
+      fullPath: '/back/etapas/crear'
+      preLoaderRoute: typeof BackEtapasCrearRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/grados/': {
+      id: '/back/grados/'
+      path: '/grados'
+      fullPath: '/back/grados/'
+      preLoaderRoute: typeof BackGradosIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/pedidos/': {
+      id: '/back/pedidos/'
+      path: '/pedidos'
+      fullPath: '/back/pedidos/'
+      preLoaderRoute: typeof BackPedidosIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/reclamos/': {
+      id: '/back/reclamos/'
+      path: '/reclamos'
+      fullPath: '/back/reclamos/'
+      preLoaderRoute: typeof BackReclamosIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/tipos-reclamo/': {
+      id: '/back/tipos-reclamo/'
+      path: '/tipos-reclamo'
+      fullPath: '/back/tipos-reclamo/'
+      preLoaderRoute: typeof BackTiposReclamoIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/usuarios/': {
+      id: '/back/usuarios/'
+      path: '/usuarios'
+      fullPath: '/back/usuarios/'
+      preLoaderRoute: typeof BackUsuariosIndexRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/catalogos/$catalogoId/libros': {
+      id: '/back/catalogos/$catalogoId/libros'
+      path: '/catalogos/$catalogoId/libros'
+      fullPath: '/back/catalogos/$catalogoId/libros'
+      preLoaderRoute: typeof BackCatalogosCatalogoIdLibrosRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/escuelas/$escuelaId/libros': {
+      id: '/back/escuelas/$escuelaId/libros'
+      path: '/escuelas/$escuelaId/libros'
+      fullPath: '/back/escuelas/$escuelaId/libros'
+      preLoaderRoute: typeof BackEscuelasEscuelaIdLibrosRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/back/etapas/$etapaId/editar': {
+      id: '/back/etapas/$etapaId/editar'
+      path: '/etapas/$etapaId/editar'
+      fullPath: '/back/etapas/$etapaId/editar'
+      preLoaderRoute: typeof BackEtapasEtapaIdEditarRouteImport
+      parentRoute: typeof BackRouteRoute
+    }
+    '/_front/$cueanexo/order_request/create/$ofertaId': {
+      id: '/_front/$cueanexo/order_request/create/$ofertaId'
+      path: '/$cueanexo/order_request/create/$ofertaId'
+      fullPath: '/$cueanexo/order_request/create/$ofertaId'
+      preLoaderRoute: typeof FrontCueanexoOrder_requestCreateOfertaIdRouteImport
+      parentRoute: typeof FrontRouteRoute
     }
   }
 }
 
+interface FrontRouteRouteChildren {
+  FrontIndexRoute: typeof FrontIndexRoute
+  FrontCueanexoIndexRoute: typeof FrontCueanexoIndexRoute
+  FrontCueanexoOrder_requestCreateOfertaIdRoute: typeof FrontCueanexoOrder_requestCreateOfertaIdRoute
+}
+
+const FrontRouteRouteChildren: FrontRouteRouteChildren = {
+  FrontIndexRoute: FrontIndexRoute,
+  FrontCueanexoIndexRoute: FrontCueanexoIndexRoute,
+  FrontCueanexoOrder_requestCreateOfertaIdRoute:
+    FrontCueanexoOrder_requestCreateOfertaIdRoute,
+}
+
+const FrontRouteRouteWithChildren = FrontRouteRoute._addFileChildren(
+  FrontRouteRouteChildren,
+)
+
+interface BackRouteRouteChildren {
+  BackDashboardRoute: typeof BackDashboardRoute
+  BackIndexRoute: typeof BackIndexRoute
+  BackEtapasCrearRoute: typeof BackEtapasCrearRoute
+  BackAsignacionMasivaIndexRoute: typeof BackAsignacionMasivaIndexRoute
+  BackCatalogosIndexRoute: typeof BackCatalogosIndexRoute
+  BackEscuelasIndexRoute: typeof BackEscuelasIndexRoute
+  BackEtapasIndexRoute: typeof BackEtapasIndexRoute
+  BackGradosIndexRoute: typeof BackGradosIndexRoute
+  BackPedidosIndexRoute: typeof BackPedidosIndexRoute
+  BackReclamosIndexRoute: typeof BackReclamosIndexRoute
+  BackTiposReclamoIndexRoute: typeof BackTiposReclamoIndexRoute
+  BackUsuariosIndexRoute: typeof BackUsuariosIndexRoute
+  BackCatalogosCatalogoIdLibrosRoute: typeof BackCatalogosCatalogoIdLibrosRoute
+  BackEscuelasEscuelaIdLibrosRoute: typeof BackEscuelasEscuelaIdLibrosRoute
+  BackEtapasEtapaIdEditarRoute: typeof BackEtapasEtapaIdEditarRoute
+}
+
+const BackRouteRouteChildren: BackRouteRouteChildren = {
+  BackDashboardRoute: BackDashboardRoute,
+  BackIndexRoute: BackIndexRoute,
+  BackEtapasCrearRoute: BackEtapasCrearRoute,
+  BackAsignacionMasivaIndexRoute: BackAsignacionMasivaIndexRoute,
+  BackCatalogosIndexRoute: BackCatalogosIndexRoute,
+  BackEscuelasIndexRoute: BackEscuelasIndexRoute,
+  BackEtapasIndexRoute: BackEtapasIndexRoute,
+  BackGradosIndexRoute: BackGradosIndexRoute,
+  BackPedidosIndexRoute: BackPedidosIndexRoute,
+  BackReclamosIndexRoute: BackReclamosIndexRoute,
+  BackTiposReclamoIndexRoute: BackTiposReclamoIndexRoute,
+  BackUsuariosIndexRoute: BackUsuariosIndexRoute,
+  BackCatalogosCatalogoIdLibrosRoute: BackCatalogosCatalogoIdLibrosRoute,
+  BackEscuelasEscuelaIdLibrosRoute: BackEscuelasEscuelaIdLibrosRoute,
+  BackEtapasEtapaIdEditarRoute: BackEtapasEtapaIdEditarRoute,
+}
+
+const BackRouteRouteWithChildren = BackRouteRoute._addFileChildren(
+  BackRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  FrontRouteRoute: FrontRouteRouteWithChildren,
+  BackRouteRoute: BackRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
