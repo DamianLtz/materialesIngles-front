@@ -82,7 +82,8 @@ function Formulario({
     defaultValues: {
       cueanexo: escuela?.cueanexo ?? "",
       nombre: escuela?.nombre ?? "",
-      distrito: escuela ? String(escuela.distrito) : "",
+      // Las migradas no tienen comuna: el campo arranca vacío y hay que cargarla para guardar
+      comuna: escuela?.comuna != null ? String(escuela.comuna) : "",
       descripcion: escuela?.descripcion ?? "",
       calle: escuela?.calle ?? "",
       altura: escuela ? String(escuela.altura) : "",
@@ -125,18 +126,18 @@ function Formulario({
           />
         </Campo>
         <Campo
-          id="escuela-distrito"
-          etiqueta="N° Distrito *"
-          error={errors.distrito?.message}
+          id="escuela-comuna"
+          etiqueta="Comuna *"
+          error={errors.comuna?.message}
         >
           <Input
-            id="escuela-distrito"
+            id="escuela-comuna"
             autoComplete="off"
             inputMode="numeric"
             placeholder="Ej: 4"
             disabled={deshabilitado}
-            aria-invalid={Boolean(errors.distrito)}
-            {...register("distrito")}
+            aria-invalid={Boolean(errors.comuna)}
+            {...register("comuna")}
           />
         </Campo>
       </div>

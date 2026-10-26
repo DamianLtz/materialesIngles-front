@@ -12,11 +12,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { escuelasOpcionesQuery } from "@/features/escuelas/api";
+import {
+  escuelasOpcionesQuery,
+  etiquetaComuna,
+  type OpcionEscuela,
+} from "@/features/escuelas/api";
 import type { DatosEtapa } from "../api";
 
 const FILAS_POR_PAGINA = 50;
-const TODOS_LOS_DISTRITOS = "todos";
+const TODAS_LAS_COMUNAS = "todas";
+const SIN_COMUNA = "sin-comuna";
+
+/** Valor del filtro para una escuela: el número de comuna, o SIN_COMUNA si no la tiene. */
+const valorComuna = (comuna: OpcionEscuela["comuna"]) =>
+  comuna === null ? SIN_COMUNA : String(comuna);
 
 /** Minúsculas y sin tildes, para buscar "peru" y encontrar "Perú". */
 const normalizar = (texto: string) =>
@@ -39,34 +48,40 @@ export function PasoEscuelas({ form, bloqueadas }: Props) {
     name: "escuelaIds",
   });
   const [texto, setTexto] = useState("");
-  const [distrito, setDistrito] = useState(TODOS_LOS_DISTRITOS);
+  const [comuna, setComuna] = useState(TODAS_LAS_COMUNAS);
   const [pagina, setPagina] = useState(1);
 
   const seleccion = useMemo(() => new Set(field.value), [field.value]);
   const conPedidos = useMemo(() => new Set(bloqueadas), [bloqueadas]);
 
-  const distritos = useMemo(
-    () => [...new Set(escuelas.map((e) => e.distrito))].sort((a, b) => a - b),
-    [escuelas],
-  );
-  const itemsDistrito = useMemo(
+  // Las comunas presentes, en orden, y "Sin comuna" al final si hay escuelas sin cargar
+  const comunas = useMemo(() => {
+    const presentes = [...new Set(escuelas.map((e) => e.comuna))];
+    const numeros = presentes
+      .filter((c) => c !== null)
+      .sort((a, b) => a - b);
+    return presentes.includes(null) ? [...numeros, null] : numeros;
+  }, [escuelas]);
+  const itemsComuna = useMemo(
     () => ({
-      [TODOS_LOS_DISTRITOS]: "Todos los distritos",
-      ...Object.fromEntries(distritos.map((d) => [String(d), `Distrito ${d}`])),
+      [TODAS_LAS_COMUNAS]: "Todas las comunas",
+      ...Object.fromEntries(
+        comunas.map((c) => [valorComuna(c), etiquetaComuna(c)]),
+      ),
     }),
-    [distritos],
+    [comunas],
   );
 
   const filtradas = useMemo(() => {
     const buscado = normalizar(texto.trim());
     return escuelas.filter(
       (e) =>
-        (distrito === TODOS_LOS_DISTRITOS || String(e.distrito) === distrito) &&
+        (comuna === TODAS_LAS_COMUNAS || valorComuna(e.comuna) === comuna) &&
         (!buscado ||
           normalizar(e.nombre).includes(buscado) ||
           e.cueanexo.includes(buscado)),
     );
-  }, [escuelas, texto, distrito]);
+  }, [escuelas, texto, comuna]);
 
   const totalPaginas = Math.max(
     1,
@@ -111,8 +126,8 @@ export function PasoEscuelas({ form, bloqueadas }: Props) {
         </span>
       </div>
 
-      <div className="flex flex-col gap-2 sm:flex-row">
-        <div className="relative flex-1">
+      <div className="flex flex-col gap-4 sm:flex-row">
+        <div className="relative sm:max-w-lg w-full">
           <SearchIcon className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             aria-label="Buscar escuela"
@@ -126,23 +141,21 @@ export function PasoEscuelas({ form, bloqueadas }: Props) {
           />
         </div>
         <Select
-          items={itemsDistrito}
-          value={distrito}
+          items={itemsComuna}
+          value={comuna}
           onValueChange={(valor) => {
-            setDistrito(valor ?? TODOS_LOS_DISTRITOS);
+            setComuna(valor ?? TODAS_LAS_COMUNAS);
             setPagina(1);
           }}
         >
-          <SelectTrigger className="w-full sm:w-52" aria-label="Distrito">
+          <SelectTrigger className="w-full sm:w-52" aria-label="Comuna">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value={TODOS_LOS_DISTRITOS}>
-              Todos los distritos
-            </SelectItem>
-            {distritos.map((d) => (
-              <SelectItem key={d} value={String(d)}>
-                Distrito {d}
+            <SelectItem value={TODAS_LAS_COMUNAS}>Todas las comunas</SelectItem>
+            {comunas.map((c) => (
+              <SelectItem key={valorComuna(c)} value={valorComuna(c)}>
+                {etiquetaComuna(c)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -189,7 +202,7 @@ export function PasoEscuelas({ form, bloqueadas }: Props) {
                       CUE/Anexo {e.cueanexo}
                     </span>
                     <span className="w-24 text-right text-muted-foreground">
-                      Distrito {e.distrito}
+                      {etiquetaComuna(e.comuna)}
                     </span>
                   </label>
                 </li>

@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "@tanstack/react-router";
 import { CheckIcon, Loader2Icon } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { useForm, type FieldErrors } from "react-hook-form";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -89,7 +89,7 @@ export function EtapaForm({ etapa }: { etapa?: EtapaDetalle }) {
     irAlPrimerError,
   );
 
-  function alEnviar(evento: FormEvent<HTMLFormElement>) {
+  function alEnviar(evento: SubmitEvent<HTMLFormElement>) {
     evento.preventDefault();
     // Enter dentro de un campo no debe guardar la etapa a medio completar
     if (paso < ULTIMO_PASO) void siguiente();
@@ -111,7 +111,7 @@ export function EtapaForm({ etapa }: { etapa?: EtapaDetalle }) {
 
       <IndicadorDePasos paso={paso} />
 
-      <div className="rounded-xl border p-4 sm:p-6">
+      <div className="rounded-lg border bg-white px-4 sm:p-6">
         {paso === 0 && <PasoInformacion form={form} errors={errors} />}
         {paso === 1 && (
           <PasoEscuelas form={form} bloqueadas={escuelasConPedidos} />
@@ -167,7 +167,60 @@ export function EtapaForm({ etapa }: { etapa?: EtapaDetalle }) {
 
 function IndicadorDePasos({ paso }: { paso: number }) {
   return (
-    <ol className="flex items-center gap-2 sm:gap-4" aria-label="Pasos">
+    <>
+      <IndicadorDePasosMobile paso={paso} />
+      <IndicadorDePasosDesktop paso={paso} />
+    </>
+  );
+}
+
+const RADIO_ANILLO = 26;
+const CIRCUNFERENCIA_ANILLO = 2 * Math.PI * RADIO_ANILLO;
+
+/** En mobile: anillo de progreso con "N de M" y el título del paso actual al lado. */
+function IndicadorDePasosMobile({ paso }: { paso: number }) {
+  const progreso = (paso + 1) / PASOS.length;
+  return (
+    <div className="flex items-center gap-4 sm:hidden bg-white p-2 outline rounded-lg outline-gris-100">
+      <div className="relative size-16 shrink-0">
+        <svg viewBox="0 0 64 64" className="size-full -rotate-90" aria-hidden>
+          <circle
+            cx="32"
+            cy="32"
+            r={RADIO_ANILLO}
+            fill="none"
+            strokeWidth="6"
+            className="stroke-muted"
+          />
+          <circle
+            cx="32"
+            cy="32"
+            r={RADIO_ANILLO}
+            fill="none"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeDasharray={CIRCUNFERENCIA_ANILLO}
+            strokeDashoffset={CIRCUNFERENCIA_ANILLO * (1 - progreso)}
+            className="stroke-primary transition-[stroke-dashoffset] duration-300"
+          />
+        </svg>
+        <span className="absolute inset-0 flex items-center justify-center text-sm font-semibold">
+          {paso + 1} de {PASOS.length}
+        </span>
+      </div>
+      <p className="text-lg font-semibold" aria-live="polite">
+        <span className="sr-only">
+          Paso {paso + 1} de {PASOS.length}:{" "}
+        </span>
+        {PASOS[paso].titulo}
+      </p>
+    </div>
+  );
+}
+
+function IndicadorDePasosDesktop({ paso }: { paso: number }) {
+  return (
+    <ol className="hidden items-center justify-center gap-4 sm:flex bg-white py-4 outline outline-gris-100 rounded-lg" aria-label="Pasos">
       {PASOS.map((p, i) => (
         <li
           key={p.titulo}
@@ -187,14 +240,13 @@ function IndicadorDePasos({ paso }: { paso: number }) {
           <span
             className={cn(
               "text-sm font-medium",
-              i === paso ? "inline" : "hidden sm:inline",
               i > paso && "text-muted-foreground",
             )}
           >
             {p.titulo}
           </span>
           {i < PASOS.length - 1 && (
-            <span className="hidden h-px w-8 bg-border sm:block" />
+            <span className="h-px w-8 bg-border" />
           )}
         </li>
       ))}

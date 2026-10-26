@@ -7,7 +7,11 @@ import { AccionesEscuela } from "./acciones-escuela";
 export const columnasEscuelas: ColumnDef<Escuela>[] = [
   { accessorKey: "nombre", header: "Nombre" },
   { accessorKey: "cueanexo", header: "CUE/Anexo" },
-  { accessorKey: "distrito", header: "Distrito" },
+  {
+    accessorKey: "comuna",
+    header: "Comuna",
+    cell: ({ row }) => row.original.comuna ?? "—",
+  },
   {
     id: "direccion",
     header: "Dirección",

@@ -52,7 +52,7 @@ export interface EscuelaDeEtapa {
   id: number;
   nombre: string;
   cueanexo: string;
-  distrito: number;
+  comuna: number | null;
 }
 
 export const CANTIDAD_MAXIMA_POR_DEFECTO = 100;

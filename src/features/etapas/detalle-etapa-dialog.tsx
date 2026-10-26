@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { etiquetaComuna } from "@/features/escuelas/api";
 import { escuelasDeEtapaQuery, type Etapa } from "./api";
 import { textoPeriodo } from "./formato";
 
@@ -95,12 +96,12 @@ function Contenido({ etapa }: { etapa: Etapa }) {
             />
           ) : (
             <>
-              <ul className="mt-1 max-h-64 space-y-1 overflow-y-auto">
+              <ul className="mt-1 flex max-h-64 flex-col gap-1 overflow-y-auto">
                 {visibles?.map((e) => (
                   <li key={e.id} className="rounded-md border px-3 py-1.5">
                     {e.nombre}{" "}
                     <span className="text-muted-foreground">
-                      · CUE/Anexo {e.cueanexo} · Distrito {e.distrito}
+                      · CUE/Anexo {e.cueanexo} · {etiquetaComuna(e.comuna)}
                     </span>
                   </li>
                 ))}

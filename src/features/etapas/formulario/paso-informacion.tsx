@@ -30,7 +30,11 @@ function CampoFecha({
   titulo: string;
 }) {
   return (
-    <div className="space-y-1.5">
+    // gap y no space-y: al abrirse, el popover agrega un elemento oculto después del botón;
+    // con space-y el botón deja de ser el último hijo, gana margen y empuja lo de abajo.
+    // flex y no grid: si el campo de al lado muestra un error, la celda se estira y grid
+    // repartiría ese alto entre sus filas, bajando el label y el botón
+    <div className="flex flex-col gap-1.5">
       <Label htmlFor={`etapa-${campo}`} className="text-muted-foreground">
         {titulo}
       </Label>
@@ -165,7 +169,8 @@ export function PasoInformacion({
         </section>
       </div>
 
-      <div className="flex items-center justify-between gap-4 rounded-lg border p-4">
+      <div className="bg-white w-fit outline outline-gris-100 rounded-lg">
+        <div className="flex items-center gap-4 p-4">
         <div className="space-y-1">
           <Label htmlFor="etapa-visible">Publicar etapa</Label>
           <p className="text-sm text-muted-foreground">
@@ -187,6 +192,7 @@ export function PasoInformacion({
             />
           )}
         />
+      </div>
       </div>
     </div>
   );

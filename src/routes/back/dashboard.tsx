@@ -181,9 +181,9 @@ function Contenido({
         </div> */}
         <div className="xl:col-span-2">
           <GraficoBarras
-            titulo="Libros por distrito escolar"
-            descripcion="Distribución de solicitudes por distrito escolar"
-            datos={g.porDistrito}
+            titulo="Libros por comuna"
+            descripcion="Distribución de solicitudes por comuna"
+            datos={g.porComuna}
             color="var(--color-graph-azul)"
           />
         </div>

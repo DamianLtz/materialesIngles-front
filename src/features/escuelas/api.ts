@@ -16,7 +16,8 @@ export interface Escuela {
   id: number;
   cueanexo: string;
   nombre: string;
-  distrito: number;
+  /** Null en las escuelas migradas hasta que alguien la cargue. */
+  comuna: number | null;
   descripcion: string | null;
   calle: string;
   altura: number;
@@ -32,8 +33,12 @@ export interface OpcionEscuela {
   id: number;
   nombre: string;
   cueanexo: string;
-  distrito: number;
+  comuna: number | null;
 }
+
+/** "Comuna 3", o "Sin comuna" para las migradas que todavía no la tienen. */
+export const etiquetaComuna = (comuna: number | null) =>
+  comuna === null ? "Sin comuna" : `Comuna ${comuna}`;
 
 /** Todas las escuelas sin paginar (son miles): se filtran y paginan en el navegador. */
 export const escuelasOpcionesQuery = queryOptions({
@@ -42,7 +47,7 @@ export const escuelasOpcionesQuery = queryOptions({
 });
 
 /**
- * Mismas reglas que valida el back (GuardarEscuelaDto). Distrito y número viajan
+ * Mismas reglas que valida el back (GuardarEscuelaDto). Comuna y número viajan
  * como texto desde los inputs y se convierten a número al enviar.
  */
 export const esquemaEscuela = z.object({
@@ -56,13 +61,14 @@ export const esquemaEscuela = z.object({
     .trim()
     .min(2, "El nombre debe tener al menos 2 caracteres.")
     .max(255, "El nombre no puede superar los 255 caracteres."),
-  distrito: z
+  comuna: z
     .string()
     .trim()
-    .regex(/^\d+$/, "El distrito debe ser un número.")
+    .min(1, "La comuna es obligatoria.")
+    .regex(/^\d+$/, "La comuna debe ser un número.")
     .refine(
-      (v) => Number(v) >= 1 && Number(v) <= 99,
-      "El distrito debe estar entre 1 y 99.",
+      (v) => Number(v) >= 1 && Number(v) <= 15,
+      "La comuna debe estar entre 1 y 15.",
     ),
   descripcion: z
     .string()
@@ -102,7 +108,7 @@ export function useGuardarEscuela(id?: number) {
     mutationFn: (datos: DatosEscuela) => {
       const cuerpo = {
         ...datos,
-        distrito: Number(datos.distrito),
+        comuna: Number(datos.comuna),
         altura: Number(datos.altura),
       };
       return id === undefined

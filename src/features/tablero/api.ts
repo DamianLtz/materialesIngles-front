@@ -49,7 +49,7 @@ export interface ResumenTablero {
     porGrado: PuntoGrafico[];
     porCatalogo: PuntoGrafico[];
     porEditorial: PuntoGrafico[];
-    porDistrito: PuntoGrafico[];
+    porComuna: PuntoGrafico[];
     reclamosPorTipo: { label: string; cantidad: number }[];
   };
 }
