@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { BookOpenIcon, PencilIcon, Trash2Icon } from "lucide-react";
+import { PencilIcon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { Catalogo } from "./api";
+import { Carpeta } from "./carpeta";
 import { CatalogoFormDialog } from "./catalogo-form-dialog";
 import { EliminarCatalogoDialog } from "./eliminar-catalogo-dialog";
 
@@ -19,12 +20,11 @@ export function TarjetaCatalogo({ catalogo }: { catalogo: Catalogo }) {
   const { id, nombre, cantidadLibros } = catalogo;
 
   return (
-    <Card className="flex flex-col">
+    // group/carpeta: la carpeta se abre al pasar por cualquier parte de la tarjeta
+    <Card className="group/carpeta flex flex-col">
       <CardHeader className="flex-1">
         <div className="mb-2 flex items-center justify-between">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <BookOpenIcon className="size-5" />
-          </div>
+          <Carpeta semilla={id} />
           <div className="flex items-center gap-1">
             <Button
               color="ghost"

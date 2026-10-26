@@ -169,6 +169,8 @@ function Contenido({
           datos={g.porEditorial}
           color="var(--color-graph-naranja-3)"
         />
+        {/* Oculto hasta confirmar si a alguien le sirve (el back sigue mandando
+            g.porCatalogo): para volver a mostrarlo, descomentar.
         <div className="xl:col-span-2">
           <GraficoBarras
             titulo="Libros por catálogo"
@@ -176,7 +178,7 @@ function Contenido({
             datos={g.porCatalogo}
             color="var(--color-graph-verde-5)"
           />
-        </div>
+        </div> */}
         <div className="xl:col-span-2">
           <GraficoBarras
             titulo="Libros por distrito escolar"
